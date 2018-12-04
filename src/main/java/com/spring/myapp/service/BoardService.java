@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.myapp.domain.Board;
 import com.spring.myapp.domain.BoardReply;
+import com.spring.myapp.dto.Member;
 
 public interface BoardService {
 	
@@ -32,7 +33,7 @@ public interface BoardService {
 	
 	boolean updateReply(Map<String, Object> paramMap);
 
-	String getlogin(String u_id);
+	Member getlogin(String u_id);
 
 	
 	

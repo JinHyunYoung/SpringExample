@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.spring.myapp.dao.BoardDao;
 import com.spring.myapp.domain.Board;
 import com.spring.myapp.domain.BoardReply;
+import com.spring.myapp.dto.Member;
 import com.spring.myapp.service.BoardService;
  
 @Service("boardService")
@@ -26,10 +27,10 @@ public class BoardServiceImpl implements BoardService {
     
     @Override
     public int regContent(Map<String, Object> paramMap) {
-        //아이디가 없으면 입력
+        //�븘�씠�뵒媛� �뾾�쑝硫� �엯�젰
         if(paramMap.get("id")==null) {
             return boardDao.regContent(paramMap);
-        }else {//아이디가 있으면 수정
+        }else {//�븘�씠�뵒媛� �엳�쑝硫� �닔�젙
             return boardDao.modifyContent(paramMap);
         }
     }
@@ -59,16 +60,16 @@ public class BoardServiceImpl implements BoardService {
  
         List<BoardReply> boardReplyList = boardDao.getReplyList(paramMap);
  
-        //msyql 에서 계층적 쿼리가 어려우니 여기서 그냥 해결하자
+        //msyql �뿉�꽌 怨꾩링�쟻 荑쇰━媛� �뼱�젮�슦�땲 �뿬湲곗꽌 洹몃깷 �빐寃고븯�옄
  
-        //부모
+        //遺�紐�
         List<BoardReply> boardReplyListParent = new ArrayList<BoardReply>();
-        //자식
+        //�옄�떇
         List<BoardReply> boardReplyListChild = new ArrayList<BoardReply>();
-        //통합
+        //�넻�빀
         List<BoardReply> newBoardReplyList = new ArrayList<BoardReply>();
  
-        //1.부모와 자식 분리
+        //1.遺�紐⑥� �옄�떇 遺꾨━
         for(BoardReply boardReply: boardReplyList){
             if(boardReply.getDepth().equals("0")){
                 boardReplyListParent.add(boardReply);
@@ -77,13 +78,13 @@ public class BoardServiceImpl implements BoardService {
             }
         }
  
-        //2.부모를 돌린다.
+        //2.遺�紐⑤�� �룎由곕떎.
         for(BoardReply boardReplyParent: boardReplyListParent){
-            //2-1. 부모는 무조건 넣는다.
+            //2-1. 遺�紐⑤뒗 臾댁“嫄� �꽔�뒗�떎.
             newBoardReplyList.add(boardReplyParent);
-            //3.자식을 돌린다.
+            //3.�옄�떇�쓣 �룎由곕떎.
             for(BoardReply boardReplyChild: boardReplyListChild){
-                //3-1. 부모의 자식인 것들만 넣는다.
+                //3-1. 遺�紐⑥쓽 �옄�떇�씤 寃껊뱾留� �꽔�뒗�떎.
                 if(boardReplyParent.getReply_id().equals(boardReplyChild.getParent_id())){
                     newBoardReplyList.add(boardReplyChild);
                 }
@@ -92,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
  
         }
  
-        //정리한 list return
+        //�젙由ы븳 list return
         return newBoardReplyList;
     }
  
@@ -122,13 +123,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
 	@Override
-	public String getlogin(String u_id) {
-		String state = boardDao.login(u_id);
-		System.out.println("seivice : "+state);
-		if(state !=null) {
-			session.setAttribute("userid", state);
+	public Member getlogin(String u_id) {
+		Member mb = boardDao.login(u_id);
+		System.out.println("seivice : "+mb);
+		if(mb !=null) {
+			session.setAttribute("mb", mb);
 		}
-		return state;
+		return mb;
 	}
 
 	/*@Override

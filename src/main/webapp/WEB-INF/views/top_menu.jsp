@@ -18,15 +18,15 @@ Rounded Corner website theme courtesy of Abdussamad Abdurrazzaq and WebsiteTheme
 						<div id="banner_tl">
 					    <div id="banner_tr">
 					    <div id="banner">
-					    <h1><a class="homelink1" href="#">RoundedCorner</a></h1>
-		          <h2><a class="homelink2" href="#">My little website theme</a></h2>
+					    <h1><a class="homelink1" href="#">이지에이스</a></h1>
+		          <!-- <h2><a class="homelink2" href="#">My little website theme</a></h2> -->
 					   </div>
 					   <div id="top_nav">
-						  <a href="#">Home</a>
+						  <!-- <a href="#">Home</a>
 						  <a href="#">Portfolio</a>
 						  <a href="#">Download</a>
 						  <a href="#">Contact Us</a>
-						  <a href="#">About</a>
+						  <a href="#">About</a> -->
 					   </div>
 					   </div>
 						</div>

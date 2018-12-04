@@ -20,7 +20,7 @@
 								<div class="sidebar_tr">
 									<div id="LeftSideBar">  
 										<div class="SideBarItem">
-										  <div class="SideBarTitle">Menu</div>
+										  <div class="SideBarTitle" style="font-size:20px;">Menu</div>
 											<a href="#">Home</a><br />
 											<a href="#">Portfolio</a><br />
 											<a href="#">Download</a><br />

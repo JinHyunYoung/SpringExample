@@ -82,7 +82,9 @@ public class BoardController {
  
     }
     @RequestMapping(value = "/login")
-    public String login(@ModelAttribute("mb") Member mb) {
+    public String login( HttpServletRequest request, @ModelAttribute("mb") Member mb) {
+    	HttpSession session = request.getSession()
+    	
 	    String userid = boardService.getlogin(mb.getU_id());
 		session.setAttribute("userid", userid);
 	    return "redirect:/board/list";

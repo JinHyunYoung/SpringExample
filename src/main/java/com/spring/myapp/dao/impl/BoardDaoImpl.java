@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.myapp.dao.BoardDao;
 import com.spring.myapp.domain.Board;
 import com.spring.myapp.domain.BoardReply;
+import com.spring.myapp.dto.Member;
 
 @Repository("boardDao")
 public class BoardDaoImpl implements BoardDao{
@@ -59,10 +60,10 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public int delReply(Map<String, Object> paramMap) {
 		if(paramMap.get("r_type").equals("main")) {
-			//�θ���� ���� �� ����
+			//占싸몌옙占쏙옙占� 占쏙옙占쏙옙 占쏙옙 占쏙옙占쏙옙
 			return sqlSession.delete("deleteBoardReplyAll", paramMap);
 		}else {
-			//�ڱ� �ڽŸ� ����
+			//占쌘깍옙 占쌘신몌옙 占쏙옙占쏙옙
 			return sqlSession.delete("deleteBoardReply", paramMap);
 		}
 		
@@ -103,10 +104,10 @@ public class BoardDaoImpl implements BoardDao{
 	}
 
 	@Override
-	public String login(String userid) {
+	public Member login(String userid) {
 		System.out.println("asdasdasd "+userid);
-		String u_id = sqlSession.selectOne("login",userid);
-		return u_id;
+		Member mb = sqlSession.selectOne("login",userid);
+		return mb;
 	}
 	
 }
