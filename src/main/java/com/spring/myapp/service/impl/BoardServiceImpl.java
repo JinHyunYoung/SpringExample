@@ -1,119 +1,141 @@
 package com.spring.myapp.service.impl;
-
+ 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+ 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.myapp.dao.BoardDao;
 import com.spring.myapp.domain.Board;
 import com.spring.myapp.domain.BoardReply;
 import com.spring.myapp.service.BoardService;
-
+ 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
-
-	@Resource(name="boardDao")
-	private BoardDao boardDao;
+ 
+    @Resource(name="boardDao")
+    private BoardDao boardDao;
+    @Autowired
+	private HttpSession session;
+    
+    @Override
+    public int regContent(Map<String, Object> paramMap) {
+        //ì•„ì´ë””ê°€ ì—†ìœ¼ë©´ ì…ë ¥
+        if(paramMap.get("id")==null) {
+            return boardDao.regContent(paramMap);
+        }else {//ì•„ì´ë””ê°€ ìˆìœ¼ë©´ ìˆ˜ì •
+            return boardDao.modifyContent(paramMap);
+        }
+    }
+ 
+    @Override
+    public int getContentCnt(Map<String, Object> paramMap) {
+        return boardDao.getContentCnt(paramMap);
+    }
+ 
+    @Override
+    public List<Board> getContentList(Map<String, Object> paramMap) {
+        return boardDao.getContentList(paramMap);
+    }
+ 
+    @Override
+    public Board getContentView(Map<String, Object> paramMap) {
+        return boardDao.getContentView(paramMap);
+    }
+ 
+    @Override
+    public int regReply(Map<String, Object> paramMap) {
+        return boardDao.regReply(paramMap);
+    }
+ 
+    @Override
+    public List<BoardReply> getReplyList(Map<String, Object> paramMap) {
+ 
+        List<BoardReply> boardReplyList = boardDao.getReplyList(paramMap);
+ 
+        //msyql ì—ì„œ ê³„ì¸µì  ì¿¼ë¦¬ê°€ ì–´ë ¤ìš°ë‹ˆ ì—¬ê¸°ì„œ ê·¸ëƒ¥ í•´ê²°í•˜ì
+ 
+        //ë¶€ëª¨
+        List<BoardReply> boardReplyListParent = new ArrayList<BoardReply>();
+        //ìì‹
+        List<BoardReply> boardReplyListChild = new ArrayList<BoardReply>();
+        //í†µí•©
+        List<BoardReply> newBoardReplyList = new ArrayList<BoardReply>();
+ 
+        //1.ë¶€ëª¨ì™€ ìì‹ ë¶„ë¦¬
+        for(BoardReply boardReply: boardReplyList){
+            if(boardReply.getDepth().equals("0")){
+                boardReplyListParent.add(boardReply);
+            }else{
+                boardReplyListChild.add(boardReply);
+            }
+        }
+ 
+        //2.ë¶€ëª¨ë¥¼ ëŒë¦°ë‹¤.
+        for(BoardReply boardReplyParent: boardReplyListParent){
+            //2-1. ë¶€ëª¨ëŠ” ë¬´ì¡°ê±´ ë„£ëŠ”ë‹¤.
+            newBoardReplyList.add(boardReplyParent);
+            //3.ìì‹ì„ ëŒë¦°ë‹¤.
+            for(BoardReply boardReplyChild: boardReplyListChild){
+                //3-1. ë¶€ëª¨ì˜ ìì‹ì¸ ê²ƒë“¤ë§Œ ë„£ëŠ”ë‹¤.
+                if(boardReplyParent.getReply_id().equals(boardReplyChild.getParent_id())){
+                    newBoardReplyList.add(boardReplyChild);
+                }
+ 
+            }
+ 
+        }
+ 
+        //ì •ë¦¬í•œ list return
+        return newBoardReplyList;
+    }
+ 
+    @Override
+    public int delReply(Map<String, Object> paramMap) {
+        return boardDao.delReply(paramMap);
+    }
+ 
+    @Override
+    public int getBoardCheck(Map<String, Object> paramMap) {
+        return boardDao.getBoardCheck(paramMap);
+    }
+ 
+    @Override
+    public int delBoard(Map<String, Object> paramMap) {
+        return boardDao.delBoard(paramMap);
+    }
+ 
+    @Override
+    public boolean checkReply(Map<String, Object> paramMap) {
+        return boardDao.checkReply(paramMap);
+    }
+ 
+    @Override
+    public boolean updateReply(Map<String, Object> paramMap) {
+        return boardDao.updateReply(paramMap);
+    }
 
 	@Override
-	public int regContent(Map<String, Object> paramMap) {
-		//¾ÆÀÌµğ°¡ ¾øÀ¸¸é ÀÔ·Â
-		if(paramMap.get("id")==null) {
-			return boardDao.regContent(paramMap);
-		}else {//¾ÆÀÌµğ°¡ ÀÖÀ¸¸é ¼öÁ¤
-			return boardDao.modifyContent(paramMap);
+	public String getlogin(String u_id) {
+		String state = boardDao.login(u_id);
+		System.out.println("seivice : "+state);
+		if(state !=null) {
+			session.setAttribute("userid", state);
 		}
+		return state;
 	}
 
-	@Override
-	public int getContentCnt(Map<String, Object> paramMap) {
-		return boardDao.getContentCnt(paramMap);
-	}
-
-	@Override
-	public List<Board> getContentList(Map<String, Object> paramMap) {
-		return boardDao.getContentList(paramMap);
-	}
-
-	@Override
-	public Board getContentView(Map<String, Object> paramMap) {
-		return boardDao.getContentView(paramMap);
-	}
-
-	@Override
-	public int regReply(Map<String, Object> paramMap) {
-		return boardDao.regReply(paramMap);
-	}
-
-	@Override
-	public List<BoardReply> getReplyList(Map<String, Object> paramMap) {
-
-		List<BoardReply> boardReplyList = boardDao.getReplyList(paramMap);
-
-		//msyql ¿¡¼­ °èÃşÀû Äõ¸®°¡ ¾î·Á¿ì´Ï ¿©±â¼­ ±×³É ÇØ°áÇÏÀÚ
-
-		//ºÎ¸ğ
-		List<BoardReply> boardReplyListParent = new ArrayList<BoardReply>();
-		//ÀÚ½Ä
-		List<BoardReply> boardReplyListChild = new ArrayList<BoardReply>();
-		//ÅëÇÕ
-		List<BoardReply> newBoardReplyList = new ArrayList<BoardReply>();
-
-		//1.ºÎ¸ğ¿Í ÀÚ½Ä ºĞ¸®
-		for(BoardReply boardReply: boardReplyList){
-			if(boardReply.getDepth().equals("0")){
-				boardReplyListParent.add(boardReply);
-			}else{
-				boardReplyListChild.add(boardReply);
-			}
-		}
-
-		//2.ºÎ¸ğ¸¦ µ¹¸°´Ù.
-		for(BoardReply boardReplyParent: boardReplyListParent){
-			//2-1. ºÎ¸ğ´Â ¹«Á¶°Ç ³Ö´Â´Ù.
-			newBoardReplyList.add(boardReplyParent);
-			//3.ÀÚ½ÄÀ» µ¹¸°´Ù.
-			for(BoardReply boardReplyChild: boardReplyListChild){
-				//3-1. ºÎ¸ğÀÇ ÀÚ½ÄÀÎ °Íµé¸¸ ³Ö´Â´Ù.
-				if(boardReplyParent.getReply_id().equals(boardReplyChild.getParent_id())){
-					newBoardReplyList.add(boardReplyChild);
-				}
-
-			}
-
-		}
-
-		//Á¤¸®ÇÑ list return
-		return newBoardReplyList;
-	}
-
-	@Override
-	public int delReply(Map<String, Object> paramMap) {
-		return boardDao.delReply(paramMap);
-	}
-
-	@Override
-	public int getBoardCheck(Map<String, Object> paramMap) {
-		return boardDao.getBoardCheck(paramMap);
-	}
-
-	@Override
-	public int delBoard(Map<String, Object> paramMap) {
-		return boardDao.delBoard(paramMap);
-	}
-
-	@Override
-	public boolean checkReply(Map<String, Object> paramMap) {
-		return boardDao.checkReply(paramMap);
-	}
-
-	@Override
-	public boolean updateReply(Map<String, Object> paramMap) {
-		return boardDao.updateReply(paramMap);
-	}
-
+	/*@Override
+	public ModelAndView getlogin(String u_id) {
+		System.out.println("111");
+		String state = boardDao.login(u_id);
+		return null;
+	}*/
+ 
 }

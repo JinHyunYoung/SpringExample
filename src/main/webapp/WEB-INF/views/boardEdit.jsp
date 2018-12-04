@@ -41,6 +41,7 @@
                     }
             		
             		//값 셋팅
+            		
             		var objParams = {
             				<c:if test="${boardView.id != null}"> //있으면 수정 없으면 등록
             				id			: $("#board_id").val(),

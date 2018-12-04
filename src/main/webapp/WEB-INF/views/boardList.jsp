@@ -5,6 +5,8 @@
 <html>
     <head>
         <title>게시판</title>
+        
+        
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -64,7 +66,6 @@
             	
             	
             	$("a[name='subject']").click(function(){
-            		
             		location.href = "/board/view?id="+$(this).attr("content_id");
             		
             	});
@@ -96,30 +97,34 @@
         </style>
     </head>
     <body>
+    <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
+    <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
+    <div style="padding-top:50px;"></div>
+    <div style="width: 100%;height:100%;">
     	<form class="form-inline" id="frmSearch" action="/board/list">
 	    	<input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
-	        <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
+        <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
 	    	<div align="center">
-	    		<table width="1200px">
+	    		<table>
 	    			<tr>
-	    				<td align="right">
+	    				<td align="right" style="text-align: right;">
 	    					<button type="button" id="write" name="write">글 작성</button>
 	    				</td>
 	    			</tr>
 	    		</table>
-	    		<table border="1" width="1200px">
+	    		<table border="1">
 	    			<tr>
 	    				<th width="50px">
 	    					No
 	    				</th>
-	    				<th width="850px">
+	    				<th width="200px">
 	    					제목
 	    				</th>
 	    				<th width="100px">
 	    					작성자
 	    				</th>
 	    				<th width="200px">
-	    					작성일
+	    					작성일${sessionScope.NAME.userid }1115
 	    				</th>
 	    			</tr>
 	    			<c:choose>
@@ -144,9 +149,12 @@
 			           	</c:otherwise> 
 			    	</c:choose>
 	    		</table>
-	    		<br>
-	    		<div id="pagination"></div>
+	    		<!-- <br> -->
+	    		<!-- <div id="pagination"></div> -->
 	    	</div>
+	    	
     	</form>
+    	
+    	</div>
     </body>
 </html>
