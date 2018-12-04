@@ -73,7 +73,7 @@ public class BoardController {
         return "boardList";
  
     }
-  //寃뚯떆湲� �긽�꽭 蹂닿린
+    //寃뚯떆湲� �긽�꽭 蹂닿린
     @RequestMapping(value = "/")
     public String home(@RequestParam Map<String, Object> paramMap, Model model) {
  
@@ -84,7 +84,7 @@ public class BoardController {
     @RequestMapping(value = "/login")
     public String login(@ModelAttribute("mb") Member mb) {
 	    String userid = boardService.getlogin(mb.getU_id());
-	    
+		session.setAttribute("userid", userid);
 	    return "redirect:/board/list";
  
     }
