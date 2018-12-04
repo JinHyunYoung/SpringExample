@@ -107,7 +107,7 @@
 	    	<div align="center">
 	    		<table>
 	    			<tr>
-	    				<td align="right" style="text-align: right;">
+	    				<td align="right" style="text-align: right;"> 
 	    					<button type="button" id="write" name="write">글 작성</button>
 	    				</td>
 	    			</tr>
