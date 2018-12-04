@@ -105,14 +105,14 @@
 	    	<input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
         <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
 	    	<div align="center">
-	    		<table>
+	    		<table style="width: 85%;">
 	    			<tr>
 	    				<td align="right" style="text-align: right;"> 
 	    					<button type="button" id="write" name="write">글 작성</button>
 	    				</td>
 	    			</tr>
 	    		</table>
-	    		<table border="1">
+	    		<table border="1" style="width: 85%;">
 	    			<tr>
 	    				<th width="50px">
 	    					No
@@ -124,7 +124,7 @@
 	    					작성자
 	    				</th>
 	    				<th width="200px">
-	    					작성일${sessionScope.NAME.userid }1115
+	    					작성일${sessionScope.NAME.userid }
 	    				</th>
 	    			</tr>
 	    			<c:choose>
@@ -149,8 +149,8 @@
 			           	</c:otherwise> 
 			    	</c:choose>
 	    		</table>
-	    		<!-- <br> -->
-	    		<!-- <div id="pagination"></div> -->
+	    		<br>
+	    		<div id="pagination"></div>
 	    	</div>
 	    	
     	</form>
