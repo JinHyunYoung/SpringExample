@@ -163,9 +163,9 @@
 		where
 		    reply_id = #{reply_id}
     </update>
-    <select id="login" resultType="String" parameterType="String">
+    <select id="login" resultType="com.spring.myapp.dto.Member" parameterType="String">
     	select
-    		u_id
+    		*
     	from
     		member
     	where

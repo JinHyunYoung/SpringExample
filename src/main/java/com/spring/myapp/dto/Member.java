@@ -7,6 +7,7 @@ public class Member {
 	private String u_pw;
 	private String u_email;
 	private String u_phone;
+	private String u_name;
 	public String getU_id() {
 		return u_id;
 	}
@@ -27,6 +28,12 @@ public class Member {
 	}
 	public String getU_phone() {
 		return u_phone;
+	}
+	public String getU_name() {
+		return u_name;
+	}
+	public void setU_name(String u_name) {
+		this.u_name = u_name;
 	}
 	public void setU_phone(String u_phone) {
 		this.u_phone = u_phone;

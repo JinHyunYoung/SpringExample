@@ -700,11 +700,13 @@
             }
     </style>
     <body>
+      <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
+      <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
     	<input type="hidden" id="board_id" name="board_id" value="${boardView.id}" />
     	<div align="center">
     		</br>
     		</br>
-   			<table border="1" width="1200px" >
+   			<table border="1" style="width:80%;" >
    				<tr>
    					<td colspan="2" align="right">
    						<input type="password" id="password" name="password" style="width:200px;" maxlength="10" placeholder="패스워드"/>

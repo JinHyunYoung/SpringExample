@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.spring.myapp.domain.Board;
 import com.spring.myapp.domain.BoardReply;
+import com.spring.myapp.dto.Member;
 
 public interface BoardDao {
 	
@@ -32,7 +33,7 @@ public interface BoardDao {
 	
 	boolean updateReply(Map<String, Object> paramMap);
 
-	String login(String u_id);
+	Member login(String u_id);
 
 	/*String login(String u_id);*/
 	
