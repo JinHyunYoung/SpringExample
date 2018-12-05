@@ -99,8 +99,9 @@
     <body>
     <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
     <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
-    <div style="padding-top:50px;"></div>
-    <div style="width: 100%;height:100%;">
+    <div><h2>공지사항</h2></div>
+    <div style="padding-top:20px;"></div>
+    <div style="width: 100%;height:70%;">
     	<form class="form-inline" id="frmSearch" action="/board/list">
 	    	<input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
         <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
@@ -124,7 +125,7 @@
 	    					작성자
 	    				</th>
 	    				<th width="200px">
-	    					작성일${sessionScope.username }
+	    					작성일
 	    				</th>
 	    			</tr>
 	    			<c:choose>

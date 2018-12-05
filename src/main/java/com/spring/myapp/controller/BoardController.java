@@ -326,6 +326,13 @@ public class BoardController {
         return retVal;
  
     }
+ // controller 추가 부분
+    
+    /*@RequestMapping(value="/joinform", method=RequestMethod.POST)
+    public Object joinform(@ModelAttribute("mb") Member mb) {
  
+        return retVal;
+ 
+    }*/
  
 }

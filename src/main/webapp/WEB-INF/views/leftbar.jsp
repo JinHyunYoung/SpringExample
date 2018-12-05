@@ -36,7 +36,8 @@
 												<input type="submit" name="sbm" value="Go!" />
 											</form>
 										</div>
-									<div class="SideBarItem">
+										<div class="SideBarItem" style="height:30%;"></div>
+									<!-- <div class="SideBarItem">
 										<div class="SideBarTitle">Sponsored Links</div>
 										<a href="#"> Travel tips</a><br />
 										<p>
@@ -50,7 +51,7 @@
 										<p>
 										  Big affiliate marketing extravaganza here. Visit our site for more details and book early to avoid dissapointment.
 										</p>
-										</div>
+										</div> -->
 									</div>
 								</div>
 							</div>
