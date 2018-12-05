@@ -31,6 +31,14 @@
             count(id)
         from
             board
+        where
+        	  1 =1 
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
+        and   subject = #{subject}
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
+        and   writer  =  #{writer} 
+        </if>    
     </select>
     <select id="selectContent" resultType="Board" parameterType="java.util.HashMap">
         select
@@ -41,6 +49,14 @@
             date_format(register_datetime, '%Y-%m-%d %H:%i:%s') register_datetime
         from
             board
+        where
+        	  1 =1 
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
+        and   subject = #{subject}
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
+        and   writer  =  #{writer} 
+        </if>     
         order by id
         limit #{start}, #{end}
     </select>
