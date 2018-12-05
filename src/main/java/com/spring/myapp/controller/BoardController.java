@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,13 @@ public class BoardController {
     //게시글 리스트 조회
     @RequestMapping(value = "/board/list")
     public String boardList(@RequestParam Map<String, Object> paramMap, Model model) {
- 
+    		
+    	System.out.println("gwgwg");
+    	System.out.println(StringUtils.isNotBlank((CharSequence) paramMap.get("startPage")));
         //조회 하려는 페이지
-        int startPage = (paramMap.get("startPage")!=null?Integer.parseInt(paramMap.get("startPage").toString()):1);
+        int startPage = (StringUtils.isNotBlank((CharSequence)paramMap.get("startPage")) ?Integer.parseInt(paramMap.get("startPage").toString()):1);
         //한페이지에 보여줄 리스트 수
-        int visiblePages = (paramMap.get("visiblePages")!=null?Integer.parseInt(paramMap.get("visiblePages").toString()):10);
+        int visiblePages = ( StringUtils.isNotBlank((CharSequence)paramMap.get("visiblePages"))   ?Integer.parseInt(paramMap.get("visiblePages").toString()):10);
         //일단 전체 건수를 가져온다.
         int totalCnt = boardService.getContentCnt(paramMap);
  

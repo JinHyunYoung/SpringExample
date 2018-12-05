@@ -73,6 +73,9 @@
             	$("#write").click(function(){
             		location.href = "/board/edit";
             	});
+            	$("#searchBtn").click(function(){
+            		$("#frmSearch").submit();
+            	});
             	            	
             	$(document).on("click","button[name='page_move']",function(){
             		
