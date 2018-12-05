@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.jws.WebParam.Mode;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +31,15 @@ public class MemberController {
 	private MemberService memberservice;
     @Autowired
 	private HttpSession session;
-    
-    
-    // controller 추가 부분
-    //
+    private ModelAndView mav;
+    //회원가입 폼 이동
     @RequestMapping(value="/joinform", method=RequestMethod.GET)
     public String joinform() {
     	
         return "joinform";
 
     }
-    
+    //회원가입 아이디 중복체크
     @RequestMapping(value="/idcheck", method=RequestMethod.POST)
     @ResponseBody
     public Object idcheck(@ModelAttribute("mb") Member mb) {
@@ -48,8 +47,37 @@ public class MemberController {
     	//리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
         boolean check = memberservice.idcheck(mb.getU_id());
-        return "home";
+        if(check) {
+        	retVal.put("chk", 1);
+        }else {
+        	retVal.put("chk", 0);
+        }
+        return retVal;
 
     }
- 
+    
+   @RequestMapping(value="/join", method=RequestMethod.POST)
+    public ModelAndView join(@ModelAttribute("mb") Member mb,
+			    		@RequestParam("birthyy") String birthyy,
+						@RequestParam("birthmm") String birthmm,
+						@RequestParam("birthdd") String birthdd,
+						@RequestParam("mail1") String mail1,
+						@RequestParam("mail2") String mail2) {
+    	String view = null;
+    	System.out.println("controller mail = "+mb.getU_address());
+    	mb.setU_birth(birthyy+"-"+birthmm+"-"+birthdd);
+    	mb.setU_email(mail1+"@"+mail2);
+    	int success = memberservice.join(mb);
+    	mav = new ModelAndView();
+    	mav.addObject("success",success);
+    	if(success ==1) {
+    		view="home";
+    	}else {
+    		view="joinform";
+    	}
+    	mav.setViewName(view);
+        return mav;
+
+    }
+    
 }

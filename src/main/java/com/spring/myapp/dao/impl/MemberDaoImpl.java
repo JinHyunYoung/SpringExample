@@ -43,5 +43,13 @@ public class MemberDaoImpl implements MemberDao{
 		System.out.println("state : "+state);
 		return state;
 	}
+
+
+	@Override
+	public int join(Member mb) {
+		int success = sqlSession.insert("joininsert",mb);
+		System.out.println("dao :"+success);
+		return success;
+	}
 	
 }

@@ -25,15 +25,17 @@ public class MemberService {
 	private HttpSession session;
     @Autowired
     private MemberDao memberdao;
-    
+    private ModelAndView mav;
     
     public boolean idcheck(String u_id) {
-		System.out.println("123123555 : "+u_id);
-		
-		
 		boolean state = memberdao.idcheck(u_id); 
-		
-		return false;
+		return state;
+	}
+
+
+	public int join(Member mb) {
+		int success =  memberdao.join(mb);
+		return success;
 	}
     
     

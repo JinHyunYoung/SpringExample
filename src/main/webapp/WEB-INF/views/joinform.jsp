@@ -37,20 +37,20 @@
         
         <!-- 입력한 값을 전송하기 위해 form 태그를 사용한다 -->
         <!-- 값(파라미터) 전송은 POST 방식, 전송할 페이지는 JoinPro.jsp -->
-        <form method="post" name="listForm">
+        <form method="post" name="listForm" id="listForm" action="join" >
             <table style="margin-left:auto;margin-right:auto;border:3px solid skyblue; ">
                 <tr>
                     <td id="title" class="td">아이디</td>
                     <td class="td" style="text-align: left;">
                         <input type="text" id="u_id" name="u_id" maxlength="50" style="width:215px;">
-                        <input type="button" value="중복확인"  id="idcheck" onclick="a()">  
+                        <input type="button" value="중복확인"  id="idcheck" onclick="idchecking()">  
                     </td>
                 </tr>
                         
                 <tr>
                     <td id="title" class="td">비밀번호</td>
                     <td class="td" style="text-align: left;">
-                        <input type="password" name="password" maxlength="50" name="u_pw" id="u_pw">
+                        <input type="password" maxlength="50" name="u_pw" id="u_pw">
                     </td>
                 </tr>
                 
@@ -64,7 +64,7 @@
                 <tr>
                     <td id="title" class="td">이름</td>
                     <td class="td" style="text-align: left;">
-                        <input type="text" name="name" maxlength="50" name="u_name" id="u_name">
+                        <input type="text"  maxlength="50" name="u_name" id="u_name">
                     </td>
                 </tr>
                     
@@ -134,7 +134,7 @@
   
   
   var chk = 1;
-  function a(){
+  function idchecking(){
 	  var u_id = $("#u_id").val();
 	  if(u_id == ""){
 	        alert("아이디를 입력해주세요");
@@ -146,7 +146,12 @@
 	              type    : "post",
 	              data    : {u_id : u_id}, 
 	              success   : function(result){
-	                alert("성공");
+	            	  if(result.chk == 1 ){
+	            		  alert("중복된 아이디입니다.");
+	            	  }else{
+	            		  alert("사용 가능한 아이디입니다.");
+	            		  chk = 0;
+	            	  }
 	                /* if(result){
 	                  
 	                } */
@@ -157,39 +162,8 @@
 	            });
 	      }
   }
- function idcheck(){
-   alert("123123");
-      var u_id = $("#u_id").val();
-      if(u_id == ""){
-        alert("아이디를 입력해주세요");
-      }else{
-    	  alert("123123");
-        $.ajax({
-              url     : "/idcheck",
-              dataType  : "json",
-              contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-              type    : "post",
-              data    : id,
-              success   : function(result){
-                alert("성공");
-                /* if(result){
-                  
-                } */
-              },
-              error   : function(request, status, error){
-                alert("실패");
-              }
-            });
-      }
- }
-    
-    
-   
-    
-    
-  
 
-
+    
   function join() {
     var state = false;
     var f = document.listForm;
@@ -211,10 +185,15 @@
       alert("전화번호를 입력해주세요");
     }else if($("#u_address").val() =="") {
       alert("주소를 입력해주세요");
-    }else {
-      state = true;
+    }else if(chk==1){
+      alert("아이디 중복체크를 해주세요");
+    }else{
+     
+    	state = true;
+    	$("#listForm").submit();
     }
    
+    
   }
 </script>
 </html>

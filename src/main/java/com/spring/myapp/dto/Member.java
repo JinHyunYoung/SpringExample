@@ -8,6 +8,29 @@ public class Member {
 	private String u_email;
 	private String u_phone;
 	private String u_name;
+	private String u_gender;
+	private String u_birth;
+	private String u_address;
+	public String getU_birth() {
+		return u_birth;
+	}
+	public void setU_birth(String u_birth) {
+		this.u_birth = u_birth;
+	}
+	public String getU_gender() {
+		return u_gender;
+	}
+	public void setU_gender(String u_gender) {
+		this.u_gender = u_gender;
+	}
+	public String getU_address() {
+		return u_address;
+	}
+	public void setU_address(String u_address) {
+		this.u_address = u_address;
+	}
+	
+	
 	public String getU_id() {
 		return u_id;
 	}
