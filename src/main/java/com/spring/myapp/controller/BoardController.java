@@ -73,7 +73,7 @@ public class BoardController {
         return "boardList";
  
     }
-    //寃뚯떆湲� �긽�꽭 蹂닿린
+    //로그인페이지
     @RequestMapping(value = "/")
     public String home(@RequestParam Map<String, Object> paramMap, Model model) {
  
@@ -326,10 +326,10 @@ public class BoardController {
         return retVal;
  
     }
- // controller 추가 부분
-    
+    // controller 추가 부분
+    //
     /*@RequestMapping(value="/joinform", method=RequestMethod.POST)
-    public Object joinform(@ModelAttribute("mb") Member mb) {
+    public Object joinform() {
  
         return retVal;
  
