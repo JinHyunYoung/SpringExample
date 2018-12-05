@@ -60,12 +60,12 @@
 	<script>
 	var message =${message}
 	
-	var loginsuccess="${loginsuccess}"
+	
 		function find(){
 			location.href="./findform";
 		}
 		
-		function join(){
+		function join() {
 			location.href="./joinform";
 		}		
 		
@@ -84,8 +84,6 @@
 		if(message ==4){
 			alert("아이디와 비밀번호를 확인해주세요");
 		}
-		if(loginsuccess ==3){
-			/* alert("로그인에성공하셨습니다."); */
-		}
+		
 	</script>
 </html>
