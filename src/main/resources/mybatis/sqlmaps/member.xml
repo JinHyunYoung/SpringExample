@@ -10,5 +10,8 @@
     	where
     		u_id = #{u_id}
     </select>
+    <insert id="joininsert" parameterType="com.spring.myapp.dto.Member">
+      insert into member values(#{u_id},#{u_pw},#{u_email},#{u_phone},#{u_name},#{u_birth},#{u_address},#{u_gender})
+    </insert>
 </mapper>
  
