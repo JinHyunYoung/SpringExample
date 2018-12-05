@@ -1,5 +1,8 @@
 package com.spring.myapp.domain;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("Board")
 public class Board {
 	
 	private String id;

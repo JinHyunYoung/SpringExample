@@ -32,7 +32,7 @@
         from
             board
     </select>
-    <select id="selectContent" resultType="com.spring.myapp.domain.Board" parameterType="java.util.HashMap">
+    <select id="selectContent" resultType="Board" parameterType="java.util.HashMap">
         select
             id,
             subject,

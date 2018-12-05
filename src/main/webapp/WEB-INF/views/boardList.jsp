@@ -107,6 +107,12 @@
         <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
 	    	<div align="center">
 	    		<table style="width: 85%;">
+	    		<tr>
+	    		제목: <input type="text" id="subject" name="subject" style="width:100px;" placeholder="제목" value=""/>
+	    		작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10"  value=""/>
+	    		<button type="button" id="searchBtn" name="searchBtn">검색</button>
+	    		
+	    		</tr>
 	    			<tr>
 	    				<td align="right" style="text-align: right;"> 
 	    					<button type="button" id="write" name="write">글 작성</button>
