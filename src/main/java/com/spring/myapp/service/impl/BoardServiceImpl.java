@@ -127,7 +127,8 @@ public class BoardServiceImpl implements BoardService {
 		Member mb = boardDao.login(u_id);
 		System.out.println("seivice : "+mb);
 		if(mb !=null) {
-			session.setAttribute("mb", mb);
+			session.setAttribute("userid", mb.getU_id());
+			session.setAttribute("username", mb.getU_name());
 		}
 		return mb;
 	}
