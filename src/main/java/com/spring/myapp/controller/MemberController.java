@@ -33,7 +33,7 @@ public class MemberController {
 	private HttpSession session;
     private ModelAndView mav;
     //회원가입 폼 이동
-    @RequestMapping(value="/joinform", method=RequestMethod.GET)
+    @RequestMapping(value="/member/joinform", method=RequestMethod.GET)
     public String joinform() {
     	
         return "joinform";
@@ -78,5 +78,14 @@ public class MemberController {
         return mav;
 
     }
-    
+   @RequestMapping(value="/logout", method=RequestMethod.GET)
+   public ModelAndView logout() {
+   	session.invalidate();
+   	mav = new ModelAndView();
+   	mav.setViewName("redirect:/");
+       return mav;
+
+   } 
+   
+   
 }
