@@ -1,6 +1,6 @@
 package com.spring.myapp.controller;
  
-import java.math.BigDecimal;
+import java.math.BigDecimal; 
 import java.util.HashMap;
 import java.util.Map;
  
@@ -23,6 +23,7 @@ import com.spring.myapp.domain.Board;
 import com.spring.myapp.dto.Member;
 import com.spring.myapp.service.BoardService;
  
+
 @Controller
 public class BoardController {
  
@@ -76,8 +77,7 @@ public class BoardController {
         model.addAttribute("startPage", startPage+"");//현재 페이지         
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
         model.addAttribute("totalPage", totalPage);//페이지 네비게이션에 보여줄 리스트 수
-        model.addAttribute("boardList", boardService.getContentList(paramMap));//검색\
-        model.addAttribute("srch",board);
+        model.addAttribute("boardList", boardService.getContentList(paramMap));//검색
  
         return "boardList";
  
