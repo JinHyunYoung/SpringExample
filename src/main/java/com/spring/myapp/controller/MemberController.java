@@ -69,9 +69,8 @@ public class MemberController {
     	mb.setU_email(mail1+"@"+mail2);
     	int success = memberservice.join(mb);
     	mav = new ModelAndView();
-    	mav.addObject("success",success);
     	if(success ==1) {
-    		view="home";
+    		view="redirect:/";
     	}else {
     		view="joinform";
     	}

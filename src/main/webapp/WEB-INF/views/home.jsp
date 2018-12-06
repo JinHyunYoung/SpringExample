@@ -40,7 +40,7 @@
 		}
 	</style>
 	<body>
-	
+	<jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
 	<form action="login" method="post">
 		<div id="div">
 			
