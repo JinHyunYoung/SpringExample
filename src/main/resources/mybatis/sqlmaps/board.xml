@@ -52,10 +52,10 @@
         where
         	  1 =1 
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
-        and   subject = #{subject}
+        and   subject like concat('%',#{subject},'%') 
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
-        and   writer  =  #{writer} 
+        and   writer like concat('%',#{writer},'%')
         </if>     
         order by id
         limit #{start}, #{end}
