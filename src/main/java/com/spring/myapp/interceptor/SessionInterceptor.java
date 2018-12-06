@@ -42,16 +42,27 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		*/
 		//!reqUrl.equals("http://localhost:8080/")
 		System.out.println(session.getAttribute("userid"));
-		if(reqUrl.equals("http://localhost:8080/") || reqUrl.equals("http://localhost:8080/login") ) {
-			return true;	
-		} else {
-			if(session.getAttribute("userid")==null){
-				System.out.println("aaa");
-				response.sendRedirect("/");
-				return false;
+		
+		if(session.getAttribute("userid") != null) {
+			response.sendRedirect("/board/list");
+			return false;
+		}else {
+			if(reqUrl.equals("http://localhost:8080/") || reqUrl.equals("http://localhost:8080/login") || reqUrl.equals("http://localhost:8080/logout") ) {
+				return true;	
+			} else if(reqUrl.equals("http://localhost:8080/joinform") || reqUrl.equals("http://localhost:8080/idcheck") || reqUrl.equals("http://localhost:8080/join")) {
+				return true;	
+			}else {
+				if(session.getAttribute("userid")==null){
+					System.out.println("aaa");
+					response.sendRedirect("/");
+					return false;
+				}
+				return true;
 			}
-			return true;
 		}
+		
+		
+		
 	}
 	
 }
