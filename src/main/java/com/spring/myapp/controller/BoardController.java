@@ -70,8 +70,8 @@ public class BoardController {
  
         Board board = new Board();
         
-        board.setSubject(paramMap.get("subject").toString());
-        board.setWriter(paramMap.get("writer").toString());
+        board.setSubject((String)paramMap.get("subject"));
+        board.setWriter((String)paramMap.get("writer"));
       //jsp 에서 보여줄 정보 추출
         model.addAttribute("startPage", startPage+"");//현재 페이지         
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
