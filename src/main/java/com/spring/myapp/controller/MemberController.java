@@ -33,7 +33,7 @@ public class MemberController {
 	private HttpSession session;
     private ModelAndView mav;
     //회원가입 폼 이동
-    @RequestMapping(value="/member/joinform", method=RequestMethod.GET)
+    @RequestMapping(value="/joinform", method=RequestMethod.GET)
     public String joinform() {
     	
         return "joinform";
