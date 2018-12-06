@@ -23,6 +23,7 @@ import com.spring.myapp.domain.Board;
 import com.spring.myapp.dto.Member;
 import com.spring.myapp.service.BoardService;
  
+
 @Controller
 public class BoardController {
  
@@ -68,16 +69,11 @@ public class BoardController {
         //ORACLE
         paramMap.put("end", startLimitPage+visiblePages);
  
-        Board board = new Board();
-        
-        board.setSubject((String)paramMap.get("subject"));
-        board.setWriter((String)paramMap.get("writer"));
       //jsp 에서 보여줄 정보 추출
         model.addAttribute("startPage", startPage+"");//현재 페이지         
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
         model.addAttribute("totalPage", totalPage);//페이지 네비게이션에 보여줄 리스트 수
-        model.addAttribute("boardList", boardService.getContentList(paramMap));//검색\
-        model.addAttribute("srch",board);
+        model.addAttribute("boardList", boardService.getContentList(paramMap));//검색
  
         return "boardList";
  
