@@ -111,8 +111,8 @@
 	    	<div align="center">
 	    		<table style="width: 85%;">
 	    		<tr>
-	    		제목: <input type="text" id="subject" name="subject" style="width:100px;" placeholder="제목" value=""/>
-	    		작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10"  value=""/>
+	    		제목: <input type="text" id="subject" name="subject" style="width:100px;" placeholder="제목" value="${srch.subject}"/>
+	    		작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10"  value="${srch.writer}"/>
 	    		<button type="button" id="searchBtn" name="searchBtn">검색</button>
 	    		
 	    		</tr>
