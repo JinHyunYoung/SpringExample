@@ -21,7 +21,7 @@
 									<div id="LeftSideBar">  
 										<div class="SideBarItem">
 										  <div class="SideBarTitle" style="font-size:20px;">Menu</div>
-											<a href="#" style="font-size: 15px;">공지사항</a><br/>
+											<a href="/board/list" style="font-size: 15px;">공지사항</a><br/>
 											<!-- <a href="#">Portfolio</a><br />
 											<a href="#">Download</a><br />
 											<a href="#">About</a><br />  <a href="#">Links</a><br />

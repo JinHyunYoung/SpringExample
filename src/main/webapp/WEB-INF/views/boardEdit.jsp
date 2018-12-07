@@ -15,7 +15,7 @@
             		location.href = "/board/list";
             	});
             	
-            	$("#save").click(function(){
+            	$("#save").click(function(){7
             		
             		//에디터 내용 가져옴
             		var content = CKEDITOR.instances.content.getData();
@@ -33,11 +33,11 @@
                     	return false;
                     }
                     
-                    if($("#password").val().trim() == ""){
+                    /* if($("#password").val().trim() == ""){
                     	alert("비밀번호를 입력하세요.");
                     	$("#password").focus();
                     	return false;
-                    }
+                    } */
             		
             		//값 셋팅
             		
@@ -47,7 +47,7 @@
             				</c:if>
             				subject		: $("#subject").val(),
             				writer		: $("#writer").val(),
-            				password	: $("#password").val(),
+            				//password	: $("#password").val(),
             				content		: content
     				};
             		
@@ -91,7 +91,7 @@
    					<td>
    						제목: <input type="text" id="subject" name="subject" style="width:600px;" placeholder="제목" value="${boardView.subject}"/>
    						작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10" readonly="readonly" value="${sessionScope.username}"/>
-   						비밀번호: <input type="password" id="password" name="password" style="width:170px;" maxlength="10" placeholder="패스워드"/>
+   						<!-- 비밀번호: <input type="password" id="password" name="password" style="width:170px;" maxlength="10" placeholder="패스워드"/> -->
    						<button id="save" name="save">저장</button>   						
    					</td>
    				</tr>

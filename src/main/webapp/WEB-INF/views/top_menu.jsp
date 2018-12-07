@@ -29,7 +29,7 @@ Rounded Corner website theme courtesy of Abdussamad Abdurrazzaq and WebsiteTheme
 						  <a href="#">About</a> -->
 						  <c:if test="${sessionScope.userid !=null }">
 						  <div style="text-align: right;">
-						  <a href="#">${sessionScope.username }</a>님
+						  <a href="../member/info">${sessionScope.username }</a>님
 						     <a href="../logout">로그아웃</a>
 						       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -686,6 +686,11 @@
             	});
             	
             });
+            
+            function comments(id,subject){
+            	var message = "?id="+id+"&subject="+subject
+            	location.href="coments"+message;
+            }
         </script>
     </head>
     <style>
@@ -728,7 +733,14 @@
    					</td>
    				</tr>
    			</table>
-   			<table border="1" width="1200px" id="reply_area">
+   			<table width="1200px">
+          <tr>
+            <td align="right">
+              <button onclick="comments(${boardView.id},'${ boardView.subject}')">답글</button>
+            </td>
+          </tr>
+        </table>
+   			<%-- <table border="1" width="1200px" id="reply_area">
    				<tr reply_type="all"  style="display:none"><!-- 뒤에 댓글 붙이기 쉽게 선언 -->
    					<td colspan="4"></td>
    				</tr>
@@ -753,8 +765,8 @@
 			    		</td>
 			    	</tr>
 			    </c:forEach>
-   			</table>
-   			<table border="1" width="1200px" bordercolor="#46AA46">
+   			</table> --%>
+   			<!-- <table border="1" width="1200px" bordercolor="#46AA46">
    				<tr>
    					<td width="500px">
 						이름: <input type="text" id="reply_writer" name="reply_writer" style="width:170px;" maxlength="10" placeholder="작성자"/>
@@ -774,7 +786,7 @@
    						<button id="list" name="list">게시판</button>
    					</td>
    				</tr>
-   			</table>
+   			</table> -->
     	</div>
     </body>
 </html>

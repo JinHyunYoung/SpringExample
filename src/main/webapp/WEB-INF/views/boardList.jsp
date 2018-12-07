@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%-- <%@ page session="false" %> --%>
+<% int i = 1; %>
 <html>
     <head>
         <title>게시판</title>
@@ -139,9 +140,21 @@
 			           	<c:otherwise>
 			            	<c:forEach var="boardList" items="${boardList}" varStatus="status">
 								<tr>
-						    		<td align="center">${boardList.id}</td>
+								    <td  align="center"><%= i++ %></td>
+						    		<%-- <td align="center">${boardList.id}</td> --%>
 						    		<td>
-						    			<a name="subject" class="mouseOverHighlight" content_id="${boardList.id}">${boardList.subject}</a>
+						    			<a name="subject" class="mouseOverHighlight" content_id="${boardList.id}"> 
+						    			
+						    			
+						    			<c:if test="${boardList.level !=1 }">
+						    			  &nbsp;&nbsp;&nbsp;
+						    			  <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
+						    			  ${boardList.subject}
+						    			</c:if>  
+						    			<c:if test="${boardList.level ==1 }">
+                        ${boardList.subject}
+                      </c:if> 
+						    			</a>
 						    		</td>
 						    		<td align="center">${boardList.writer}</td>
 						    		<td align="center">${boardList.register_datetime}</td>
