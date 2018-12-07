@@ -90,6 +90,7 @@
   <input type="hidden"  name="level" value=${level} />
   <input type="hidden"  name="group_no" value="${group_no}" />
   <input type="hidden"  name="seq" value="${seq}" />
+  <input type="hidden"  name="no" value="${no}" />
   <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
        <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
        <div><h2>답글</h2></div>

@@ -348,6 +348,7 @@ public class BoardController {
         mav.addObject("level",board.getLevel());
         mav.addObject("group_no",board.getGroup_no());
         mav.addObject("seq",board.getSeq());
+        mav.addObject("no",board.getNo());
         mav.setViewName("board_coments");
         return mav;
  
@@ -366,14 +367,21 @@ public class BoardController {
     	System.out.println("board seq:" + board.getSeq());
     	System.out.println("board subject:" + board.getSubject());
     	System.out.println("board content:"+ board.getContent());
+    	System.out.println("board no:"+ board.getNo());
     	System.out.println("답글 컬럼 가져오기 end");
+    	
+    	
+    	
+    	
+    	
     	
     	int success = boardService.comentssave(board);
     	System.out.println("컨트롤러 success  :"+success);
+    	mav.addObject("boardList",board);
+    	mav.setViewName("redirect:/board/list");
     	
     	
-    	
-        return null;
+        return mav;
  
     }
     // controller 추가 부분

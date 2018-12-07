@@ -145,15 +145,27 @@
 						    		<td>
 						    			<a name="subject" class="mouseOverHighlight" content_id="${boardList.id}"> 
 						    			
-						    			
-						    			<c:if test="${boardList.level !=1 }">
+                         
+	                      <c:if test ="${boardList.level != 1 }">
+	                         <c:forEach  var="i"   begin="1" end="${boardList.level}" step="1">
+	                           &nbsp;&nbsp;&nbsp;  
+	                           
+	                          </c:forEach>
+	                           <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
+	                       </c:if>
+	                         
+	                       ${boardList.subject}
+                      <%-- <c:if test="${boardList.level ==1 }">
+                        ${boardList.subject}
+                      </c:if> --%>
+						    			<%-- <c:if test="${boardList.level !=1 }">
 						    			  &nbsp;&nbsp;&nbsp;
 						    			  <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
 						    			  ${boardList.subject}
 						    			</c:if>  
 						    			<c:if test="${boardList.level ==1 }">
                         ${boardList.subject}
-                      </c:if> 
+                      </c:if>  --%>
 						    			</a>
 						    		</td>
 						    		<td align="center">${boardList.writer}</td>

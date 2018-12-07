@@ -13,6 +13,13 @@ public class Board {
 	private int group_no;
 	private int level;
 	private String seq;
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
+	private int no;
 	
 	
 	

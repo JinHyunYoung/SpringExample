@@ -123,6 +123,12 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public int comentssave(Board board) {
+		System.out.println("!11 L "+board.getSeq());
+		/*if(board.getLevel() ==  2) {
+			int number = sqlSession.selectOne("select1",board.getGroup_no()); 
+			board.setNo(number);
+			//no 2
+		}*/
 		int success = sqlSession.insert("comentssave",board); 
 		System.out.println("dao : "+success);
 		return success;
