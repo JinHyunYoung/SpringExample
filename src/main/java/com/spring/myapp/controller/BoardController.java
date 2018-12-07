@@ -31,7 +31,7 @@ public class BoardController {
     BoardService boardService;
     @Autowired
 	private HttpSession session;
-    
+    private ModelAndView mav;
     
     //게시글 리스트 조회
     @RequestMapping(value = "/board/list")
@@ -68,12 +68,16 @@ public class BoardController {
  
         //ORACLE
         paramMap.put("end", startLimitPage+visiblePages);
- 
+        System.out.println("start :"+startLimitPage);
+        System.out.println("end :"+startLimitPage+visiblePages);
       //jsp 에서 보여줄 정보 추출
         model.addAttribute("startPage", startPage+"");//현재 페이지         
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
         model.addAttribute("totalPage", totalPage);//페이지 네비게이션에 보여줄 리스트 수
+        
         model.addAttribute("boardList", boardService.getContentList(paramMap));//검색
+        //
+        
  
         return "boardList";
  
@@ -142,10 +146,10 @@ public class BoardController {
         //리턴값
         Map<String, Object> retVal = new HashMap<String, Object>();
       
-        //패스워드 암호화
+/*        //패스워드 암호화
         ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
         String password = encoder.encodePassword(paramMap.get("password").toString(), null);
-        paramMap.put("password", password);
+        paramMap.put("password", password);*/
  
         //정보입력
         int result = boardService.regContent(paramMap);
@@ -329,6 +333,47 @@ public class BoardController {
         }
  
         return retVal;
+ 
+    }
+    //답글 페이지이동
+    @RequestMapping(value="/board/coments", method=RequestMethod.GET)
+    public ModelAndView coments(@ModelAttribute("board") Board board) {
+    	System.out.println("board :" + board.getId());
+    	System.out.println("board :" + board.getSubject());
+    	
+        mav = new ModelAndView();
+        board = boardService.getdata(board.getId());
+        mav.addObject("id",board.getId());
+        mav.addObject("subject",board.getSubject());
+        mav.addObject("level",board.getLevel());
+        mav.addObject("group_no",board.getGroup_no());
+        mav.addObject("seq",board.getSeq());
+        mav.setViewName("board_coments");
+        return mav;
+ 
+    }
+    //답글 달기
+    @RequestMapping(value="/board/comentssave", method=RequestMethod.POST)
+    public ModelAndView comentssave(@ModelAttribute("board") Board board) {
+    	System.out.println("-------------");
+    	board.setLevel(board.getLevel()+1); //답글 레벨 1 증가
+    	System.out.println(board.getLevel());
+    	System.out.println("------------------------");
+    	System.out.println("답글 컬럼 가져오기 start");
+    	System.out.println("board id :" + board.getId());
+    	System.out.println("board level:" + board.getLevel());
+    	System.out.println("board group+no:" + board.getGroup_no());
+    	System.out.println("board seq:" + board.getSeq());
+    	System.out.println("board subject:" + board.getSubject());
+    	System.out.println("board content:"+ board.getContent());
+    	System.out.println("답글 컬럼 가져오기 end");
+    	
+    	int success = boardService.comentssave(board);
+    	System.out.println("컨트롤러 success  :"+success);
+    	
+    	
+    	
+        return null;
  
     }
     // controller 추가 부분

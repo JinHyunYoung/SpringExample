@@ -2,17 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.myapp.dao.BoardDao">
+    
+    
+    
     <insert id="insertContent" parameterType="java.util.HashMap">
+      <selectKey resultType="String" keyProperty="vncRqMngNo" order="BEFORE">
+         select max(id) +1 from board;
+      </selectKey>
         insert into board(
             subject,
             content,
             writer,
-            password
+            grp,
+            level,
+            seq
+            <!-- password -->
         )values(
             #{subject},
             #{content},
             #{writer},
-            #{password}
+            ${vncRqMngNo},
+            1,
+            1
+            <!-- #{password} -->
         )
     </insert>
     <insert id="updateContent" parameterType="java.util.HashMap">
@@ -46,6 +58,7 @@
             subject,
             content,
             writer,
+            level,
             date_format(register_datetime, '%Y-%m-%d %H:%i:%s') register_datetime
         from
             board
@@ -57,7 +70,7 @@
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
         and   writer like concat('%',#{writer},'%')
         </if>     
-        order by id
+        order by grp desc,level asc
         limit #{start}, #{end}
     </select>
     <select id="selectContentView" resultType="com.spring.myapp.domain.Board" parameterType="java.util.HashMap">
@@ -187,5 +200,27 @@
     	where
     		u_id = #{u_id}
     </select>
+    <select id="boarddata" resultType="Board" parameterType="int">
+      select
+        id,subject,level,grp as group_no,seq
+      from
+        Board
+      where
+        id = #{id}
+       
+    </select>
+    <insert id="comentssave" parameterType="Board">
+        insert into board
+        (subject,content,writer,grp,level,seq)
+           values(
+	            
+	            #{subject},
+	            #{content},
+	            #{writer},
+	            #{group_no},
+	            #{level},
+	            #{seq}
+        )
+    </insert>
 </mapper>
  

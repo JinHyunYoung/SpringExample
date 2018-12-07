@@ -10,7 +10,32 @@ public class Board {
 	private String content;
 	private String writer;
 	private String register_datetime;
+	private int group_no;
+	private int level;
+	private String seq;
 	
+	
+	
+	
+	
+	public String getSeq() {
+		return seq;
+	}
+	public void setSeq(String seq) {
+		this.seq = seq;
+	}
+	public int getGroup_no() {
+		return group_no;
+	}
+	public void setGroup_no(int group_no) {
+		this.group_no = group_no;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public String getId() {
 		return id;
 	}

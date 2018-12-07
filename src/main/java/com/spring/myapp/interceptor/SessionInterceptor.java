@@ -17,10 +17,10 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		System.out.println("123123123123123");
 		if(session.getAttribute("userid")==null){
-			response.sendRedirect("/");
+			response.sendRedirect(""
+					+ "");
 			return false;
 		}
 		return true;
 	}
-	
 }

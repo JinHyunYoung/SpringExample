@@ -35,6 +35,10 @@ public interface BoardService {
 
 	Member getlogin(String u_id);
 
+	Board getdata(String id);
+
+	int comentssave(Board board);
+
 	
 	
 }

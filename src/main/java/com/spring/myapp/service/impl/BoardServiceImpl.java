@@ -133,6 +133,20 @@ public class BoardServiceImpl implements BoardService {
 		return mb;
 	}
 
+	@Override
+	public Board getdata(String id) {
+		Board board = boardDao.getdata(id);
+		System.out.println("sss :"+board);
+		return board;
+	}
+	@Override
+	public int comentssave(Board board) {;
+		System.out.println("sss :"+board);
+		int success = boardDao.comentssave(board);
+		System.out.println("서비스 :"+success);
+		return success;
+	}
+
 	/*@Override
 	public ModelAndView getlogin(String u_id) {
 		System.out.println("111");

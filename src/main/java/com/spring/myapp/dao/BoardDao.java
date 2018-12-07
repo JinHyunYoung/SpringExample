@@ -35,6 +35,10 @@ public interface BoardDao {
 
 	Member login(String u_id);
 
+	Board getdata(String id);
+
+	int comentssave(Board board);
+
 	/*String login(String u_id);*/
 	
 }

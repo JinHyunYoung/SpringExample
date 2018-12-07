@@ -25,6 +25,8 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public int regContent(Map<String, Object> paramMap) {
 		return sqlSession.insert("insertContent", paramMap);
+		
+		
 	}
 	
 	@Override
@@ -108,6 +110,22 @@ public class BoardDaoImpl implements BoardDao{
 		System.out.println("asdasdasd "+userid);
 		Member mb = sqlSession.selectOne("login",userid);
 		return mb;
+	}
+	
+	@Override
+	public Board getdata(String id) {
+		Board board = sqlSession.selectOne("boarddata",id);
+		
+		System.out.println("boardleve L "+board.getLevel());
+		System.out.println("board 1 :"+board.getSeq());
+		return board;
+	}
+
+	@Override
+	public int comentssave(Board board) {
+		int success = sqlSession.insert("comentssave",board); 
+		System.out.println("dao : "+success);
+		return success;
 	}
 	
 }
