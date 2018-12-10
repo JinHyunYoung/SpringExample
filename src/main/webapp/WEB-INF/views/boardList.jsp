@@ -7,7 +7,7 @@
     <head>
         <title>게시판</title>
         
-        
+        <link rel = "stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -95,26 +95,27 @@
 				   color: blue;
 				   pointer-events: auto;
 				}
+				
         </style>
     </head>
     <body>
     <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
     <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
-    <div><h2>공지사항</h2></div>
+    <div><h2 style="font-size: 20px;">공지사항</h2></div>
     <div style="padding-top:20px;"></div>
     <div style="width: 100%;height:70%;">
     	<form class="form-inline" id="frmSearch" action="/board/list">
 	    	<input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
         <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
 	    	<div align="center">
-	    		<table style="width: 85%;">
+	    		<table class="board_list">
 	    			<tr>
 	    				<td align="right" style="text-align: right;"> 
 	    					<button type="button" id="write" name="write">글 작성</button>
 	    				</td>
 	    			</tr>
 	    		</table>
-	    		<table border="1" style="width: 85%;">
+	    		<table border="1" class="board_list">
 	    			<tr>
 	    				<th width="50px">
 	    					No
@@ -140,20 +141,16 @@
 			           	<c:otherwise>
 			            	<c:forEach var="boardList" items="${boardList}" varStatus="status">
 								<tr>
-								    <td  align="center"><%= i++ %> //${boardList.level }</td>
+								    <td align="center"><%= i++ %></td>
 						    		<%-- <td align="center">${boardList.id}</td> --%>
-						    		<td>
-						    			<a name="subject" class="mouseOverHighlight" content_id="${boardList.id}"> 
-						    			
-                         
+						    		<td style="text-align: left;">
+						    			<a name="subject" class="tLeft" content_id="${boardList.id}"> 
 	                      <c:if test ="${boardList.level != 0 }">
 	                         <c:forEach  var="i"   begin="1" end="${boardList.level}" step="1">
 	                           &nbsp;&nbsp;&nbsp;  
-	                           
 	                          </c:forEach>
 	                           <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
 	                       </c:if>
-	                         
 	                       ${boardList.subject}
                       <%-- <c:if test="${boardList.level ==1 }">
                         ${boardList.subject}
@@ -176,7 +173,7 @@
 			    	</c:choose>
 	    		</table>
 	    		<br>
-	    		<div id="pagination"></div>
+	    		<div class="page_navi" id="pagination"></div>
 	    	</div>
 	    	
     	</form>

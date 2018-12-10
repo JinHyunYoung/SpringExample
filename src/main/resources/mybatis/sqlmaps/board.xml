@@ -59,7 +59,7 @@
             content,
             writer,
             level,
-            date_format(register_datetime, '%Y-%m-%d %H:%i:%s') register_datetime
+            date_format(register_datetime, '%Y-%m-%d') register_datetime
         from
             board
         where
@@ -69,7 +69,7 @@
         </if>
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
         and   writer like concat('%',#{writer},'%')
-        </if>     
+        </if>
         ORDER BY grp DESC, seq ASC
         limit #{start}, #{end}
     </select>

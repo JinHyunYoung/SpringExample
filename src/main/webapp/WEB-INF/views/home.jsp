@@ -36,6 +36,17 @@
 		    height: 30px;
 		}
 	</style>
+<script type="text/javascript">
+  function init() {
+	  var session = "${sessionScope.userid}";
+	  if(session !=null){
+		  location.href="./board/list";
+	  }else{
+		  location.href="./";
+	  }
+  }
+
+</script>
 	<body>
 	<jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
 	<form action="login" method="post">
