@@ -345,9 +345,9 @@ public class BoardController {
         board = boardService.getdata(board.getId());
         mav.addObject("id",board.getId());
         mav.addObject("subject",board.getSubject());
-        mav.addObject("orignNo",board.getOrignNo());
-        mav.addObject("groupOrd",board.getGroupOrd());
-        mav.addObject("groupLayer",board.getGroupLayer());
+        mav.addObject("group_no",board.getGroup_no());
+        mav.addObject("seq",board.getSeq());
+        mav.addObject("level",board.getLevel());
         mav.setViewName("board_coments");
         return mav;
  
@@ -356,15 +356,19 @@ public class BoardController {
     @RequestMapping(value="/board/comentssave", method=RequestMethod.POST)
     public ModelAndView comentssave(@ModelAttribute("board") Board board) {
     	System.out.println("-------------");
-    	board.setGroupLayer(board.getGroupLayer()+1); //답글 레벨 1 증가
+    	/*board.setGroupLayer(board.getGroupLayer()+1); //답글 레벨 1 증가
     	board.setGroupOrd(board.getGroupOrd()+1); //답글 레벨 1 증가
-    	System.out.println(board.getGroupLayer());
+    	System.out.println(board.getGroupLayer());*/
+    	board.setLevel(board.getLevel()+1);
+    	board.setSeq(board.getSeq()+1);
+    	
+    	
     	System.out.println("------------------------");
     	System.out.println("답글 컬럼 가져오기 start");
     	System.out.println("board id :" + board.getId());
-    	System.out.println("board getGroupLayer:" + board.getGroupLayer());
-    	System.out.println("board getGroupOrd:" + board.getGroupOrd());
-    	System.out.println("board getOrignNo:" + board.getOrignNo());
+    	System.out.println("board getGroupLayer:" + board.getLevel());
+    	System.out.println("board getGroupOrd:" + board.getSeq());
+    	System.out.println("board getOrignNo:" + board.getGroup_no());
     	System.out.println("board subject:" + board.getSubject());
     	System.out.println("board content:"+ board.getContent());
     	System.out.println("답글 컬럼 가져오기 end");
@@ -376,6 +380,7 @@ public class BoardController {
     	
     	int success = boardService.comentssave(board);
     	System.out.println("컨트롤러 success  :"+success);
+    	System.out.println("----------------------" +board.getLevel());
     	mav.addObject("boardList",board);
     	mav.setViewName("redirect:/board/list");
     	

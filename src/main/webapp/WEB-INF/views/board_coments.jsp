@@ -87,9 +87,9 @@
 
 <form action="" method="post" name="listForm">
   <input type="hidden"  name="id" value="${id}" />
-  <input type="hidden"  name="orignNo" value="${orignNo}" />
-  <input type="hidden"  name="groupOrd" value="${groupOrd}" />
-  <input type="text"  name="groupLayer" value="${groupLayer}" />
+  <input type="hidden"  name="group_no" value="${group_no}" />
+  <input type="hidden"  name="seq" value="${seq}" />
+  <input type="text"  name="level" value="${level}" />
   <jsp:include page = "/WEB-INF/views/top_menu.jsp"/>
        <jsp:include page = "/WEB-INF/views/leftbar.jsp"/>
        <div><h2>답글</h2></div>

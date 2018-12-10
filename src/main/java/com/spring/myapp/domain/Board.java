@@ -12,21 +12,14 @@ public class Board {
 	private String register_datetime;
 	private int group_no;
 	private int level;
-	private String seq;
+	private int seq;
 	
     /*
      * 계층형 게시판을 위한 추가 필드
      * originNo, groupOrd, groupLayer 
      */
     
-    /** 원글 번호 **/
-    private int orignNo;
-    
-    /** 원글(답글포함)에 대한 순서 **/
-    private int groupOrd;
- 
-    /** 답글 계층 **/
-    private int groupLayer;
+
 
 	public String getId() {
 		return id;
@@ -84,37 +77,15 @@ public class Board {
 		this.level = level;
 	}
 
-	public String getSeq() {
+	public int getSeq() {
 		return seq;
 	}
 
-	public void setSeq(String seq) {
+	public void setSeq(int seq) {
 		this.seq = seq;
 	}
 
-	public int getOrignNo() {
-		return orignNo;
-	}
 
-	public void setOrignNo(int orignNo) {
-		this.orignNo = orignNo;
-	}
-
-	public int getGroupOrd() {
-		return groupOrd;
-	}
-
-	public void setGroupOrd(int groupOrd) {
-		this.groupOrd = groupOrd;
-	}
-
-	public int getGroupLayer() {
-		return groupLayer;
-	}
-
-	public void setGroupLayer(int groupLayer) {
-		this.groupLayer = groupLayer;
-	}
     
 	
 	

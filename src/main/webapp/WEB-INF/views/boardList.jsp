@@ -140,13 +140,13 @@
 			           	<c:otherwise>
 			            	<c:forEach var="boardList" items="${boardList}" varStatus="status">
 								<tr>
-								    <td  align="center"><%= i++ %></td>
+								    <td  align="center"><%= i++ %> //${boardList.level }</td>
 						    		<%-- <td align="center">${boardList.id}</td> --%>
 						    		<td>
 						    			<a name="subject" class="mouseOverHighlight" content_id="${boardList.id}"> 
 						    			
                          
-	                      <c:if test ="${boardList.level != 1 }">
+	                      <c:if test ="${boardList.level != 0 }">
 	                         <c:forEach  var="i"   begin="1" end="${boardList.level}" step="1">
 	                           &nbsp;&nbsp;&nbsp;  
 	                           
