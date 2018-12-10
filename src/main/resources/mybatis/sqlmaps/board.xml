@@ -13,18 +13,16 @@
             subject,
             content,
             writer,
-            grp,
-            level,
-            seq,
-            no
+            orignNo,
+            groupOrd,
+            groupLayer
             <!-- password -->
         )values(
             #{subject},
             #{content},
             #{writer},
             ${vncRqMngNo},
-            1,
-            1,
+            0,
             0
             <!-- #{password} -->
         )
@@ -60,7 +58,6 @@
             subject,
             content,
             writer,
-            level,
             date_format(register_datetime, '%Y-%m-%d %H:%i:%s') register_datetime
         from
             board
@@ -72,8 +69,7 @@
         <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
         and   writer like concat('%',#{writer},'%')
         </if>     
-        order by grp desc, no asc 
-        <!-- order by grp desc,no,level asc -->
+        ORDER BY orignNo DESC, groupOrd ASC
         limit #{start}, #{end}
     </select>
     <select id="selectContentView" resultType="com.spring.myapp.domain.Board" parameterType="java.util.HashMap">
@@ -205,7 +201,7 @@
     </select>
     <select id="boarddata" resultType="Board" parameterType="int">
       select
-        id,subject,level,grp as group_no,seq,no
+        id,subject,orignNo,groupOrd, groupLayer
       from
         Board
       where
@@ -213,22 +209,24 @@
        
     </select>
     <select id="select1" resultType="int" parameterType="String">
-      select MAX(no) +1  from board  where grp = #{group_no}  ;
+      select MAX(groupOrd) +1  from board  where orignNo = #{orignNo}  ;
     </select>
     <insert id="comentssave" parameterType="Board">
         insert into board
-        (subject,content,writer,grp,level,seq,no)
+        (subject,content,writer,orignNo,groupOrd,groupLayer)
            values(
 	            
 	            #{subject},
 	            #{content},
 	            #{writer},
-	            #{group_no},
-	            #{level},
-	            #{seq},
-	            #{no}
+	            #{orignNo},
+	            #{groupOrd},
+	            #{groupLayer}
 	            
         )
+    </insert>
+    <insert id="updateComentOrd" parameterType="Board">
+        update board set groupOrd = groupOrd + 1 where orignNo = #{orignNo} and groupOrd >= #{groupOrd}
     </insert>
 </mapper>
  

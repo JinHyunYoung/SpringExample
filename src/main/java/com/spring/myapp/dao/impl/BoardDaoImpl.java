@@ -133,5 +133,15 @@ public class BoardDaoImpl implements BoardDao{
 		System.out.println("dao : "+success);
 		return success;
 	}
+
+	@Override
+	public int updateComentOrd(Board board) {
+		// TODO Auto-generated method stub
+		
+		
+		int success = sqlSession.update("updateComentOrd",board); 
+		System.out.println("dao : "+success);
+		return success;
+	}
 	
 }

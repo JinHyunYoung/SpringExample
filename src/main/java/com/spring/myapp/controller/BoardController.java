@@ -345,10 +345,9 @@ public class BoardController {
         board = boardService.getdata(board.getId());
         mav.addObject("id",board.getId());
         mav.addObject("subject",board.getSubject());
-        mav.addObject("level",board.getLevel());
-        mav.addObject("group_no",board.getGroup_no());
-        mav.addObject("seq",board.getSeq());
-        mav.addObject("no",board.getNo());
+        mav.addObject("orignNo",board.getOrignNo());
+        mav.addObject("groupOrd",board.getGroupOrd());
+        mav.addObject("groupLayer",board.getGroupLayer());
         mav.setViewName("board_coments");
         return mav;
  
@@ -357,17 +356,17 @@ public class BoardController {
     @RequestMapping(value="/board/comentssave", method=RequestMethod.POST)
     public ModelAndView comentssave(@ModelAttribute("board") Board board) {
     	System.out.println("-------------");
-    	board.setLevel(board.getLevel()+1); //답글 레벨 1 증가
-    	System.out.println(board.getLevel());
+    	board.setGroupLayer(board.getGroupLayer()+1); //답글 레벨 1 증가
+    	board.setGroupOrd(board.getGroupOrd()+1); //답글 레벨 1 증가
+    	System.out.println(board.getGroupLayer());
     	System.out.println("------------------------");
     	System.out.println("답글 컬럼 가져오기 start");
     	System.out.println("board id :" + board.getId());
-    	System.out.println("board level:" + board.getLevel());
-    	System.out.println("board group+no:" + board.getGroup_no());
-    	System.out.println("board seq:" + board.getSeq());
+    	System.out.println("board getGroupLayer:" + board.getGroupLayer());
+    	System.out.println("board getGroupOrd:" + board.getGroupOrd());
+    	System.out.println("board getOrignNo:" + board.getOrignNo());
     	System.out.println("board subject:" + board.getSubject());
     	System.out.println("board content:"+ board.getContent());
-    	System.out.println("board no:"+ board.getNo());
     	System.out.println("답글 컬럼 가져오기 end");
     	
     	

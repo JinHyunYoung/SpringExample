@@ -38,7 +38,9 @@ public interface BoardDao {
 	Board getdata(String id);
 
 	int comentssave(Board board);
-
+	
+	int updateComentOrd(Board board);
+	
 	/*String login(String u_id);*/
 	
 }

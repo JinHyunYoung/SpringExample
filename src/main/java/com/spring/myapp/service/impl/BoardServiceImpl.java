@@ -142,6 +142,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int comentssave(Board board) {;
 		System.out.println("sss :"+board);
+		int suc  =   boardDao.updateComentOrd(board);
 		int success = boardDao.comentssave(board);
 		System.out.println("서비스 :"+success);
 		return success;
