@@ -1,5 +1,7 @@
 package com.spring.myapp.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +129,35 @@ public class BoardDaoImpl implements BoardDao{
 	public int updateComentOrd(Board board) {
 		int success = sqlSession.update("updateComentOrd",board); 
 		return success;
+	}
+
+	@Override
+	public int replyinsert(BoardReply br) {
+		System.out.println("123123 : "+br.getReply_id());
+		System.out.println("123123 : "+br.getBoard_id());
+		System.out.println("123123 : "+br.getReply_writer());
+		System.out.println("---------------------------------");
+		
+		int success = sqlSession.insert("replyinsert",br);
+		System.out.println("dao success :" +success);
+		return success;
+	}
+
+	@Override
+	public List<BoardReply> replydata(String board_id) {
+
+		System.out.println("dao : "+board_id);
+		List<BoardReply> brList = sqlSession.selectList("replydata",board_id);
+		System.out.println(brList.size());
+		//Board board1 = sqlSession.selectOne("boarddata",board.getId());
+		return brList;
+	}
+
+	@Override
+	public Board boarddata(String id) {
+		Board  board = sqlSession.selectOne("bordata",id);
+		System.out.println("bordata");
+		return board;
 	}
 	
 }

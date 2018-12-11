@@ -1,5 +1,6 @@
 package com.spring.myapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,12 @@ public interface BoardService {
 	Board getdata(String id);
 
 	int comentssave(Board board);
+
+	int replyinsert(BoardReply br);
+
+	List<BoardReply> replydata(String board_id);
+
+	Board boarddata(String id);
 
 	
 	

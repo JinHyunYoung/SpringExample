@@ -67,7 +67,7 @@
             	
             	
             	$("a[name='subject']").click(function(){
-            		location.href = "/board/view?id="+$(this).attr("content_id");
+            		location.href = "/board/view?board_id="+$(this).attr("content_id");
             		
             	});
             	

@@ -1,5 +1,6 @@
 package com.spring.myapp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,12 @@ public interface BoardDao {
 	int comentssave(Board board);
 	
 	int updateComentOrd(Board board);
+
+	int replyinsert(BoardReply br);
+
+	List<BoardReply> replydata(String board_id);
+
+	Board boarddata(String id);
 	
 	/*String login(String u_id);*/
 	

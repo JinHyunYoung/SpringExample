@@ -1,7 +1,9 @@
 package com.spring.myapp.controller;
  
-import java.math.BigDecimal; 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
  
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.spring.myapp.domain.Board;
+import com.spring.myapp.domain.BoardReply;
 import com.spring.myapp.dto.Member;
 import com.spring.myapp.service.BoardService;
  
@@ -93,16 +96,7 @@ public class BoardController {
 	    return "redirect:/board/list";
  
     }
-    //게시글 상세 보기
-    @RequestMapping(value = "/board/view")
-    public String boardView(@RequestParam Map<String, Object> paramMap, Model model) {
- 
-        model.addAttribute("replyList", boardService.getReplyList(paramMap));
-        model.addAttribute("boardView", boardService.getContentView(paramMap));
- 
-        return "boardView";
- 
-    }
+    
  
     //게시글 등록 및 수정
     @RequestMapping(value = "/board/edit")
@@ -133,116 +127,50 @@ public class BoardController {
         }
  
     }
+  //게시글 상세 보기
+    @RequestMapping(value = "/board/view")
+    public ModelAndView boardView(@ModelAttribute("br") BoardReply br) {
+    	
+    	System.out.println("br ? "+br.getBoard_id());
+    	
+    	mav = new ModelAndView();
+    	String id = br.getBoard_id();
+    	List<BoardReply> brList = boardService.replydata(br.getBoard_id());
+    	
+    	Board board1 = boardService.boarddata(id);
+    	System.out.println("0000000000000000000000000");
+    	System.out.println("brList--------------------");
+    	mav.addObject("brList",brList);
+    	mav.addObject("board1",board1);
+    	mav.addObject("board1",board1);
+    	mav.addObject("board1",board1);
+    	mav.addObject("board1",board1);
+    	mav.addObject("board1",board1);
+    	//Board board = boardService.getdata(br.getReply_id());
+    	mav.addObject("board_id",br.getBoard_id());
+    	mav.setViewName("boardView");
+    	System.out.println();
  
-  //AJAX 호출 (게시글 등록, 수정)
-    @RequestMapping(value="/board/save", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardSave(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
-      
-/*        //패스워드 암호화
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
-        String password = encoder.encodePassword(paramMap.get("password").toString(), null);
-        paramMap.put("password", password);*/
- 
-        //정보입력
-        int result = boardService.regContent(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-            retVal.put("message", "등록에 성공 하였습니다.");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "동록에 실패 하였습니다.");
-        }
- 
-        return retVal;
- 
-    }
- 
-    //AJAX 호출 (게시글 삭제
-    @RequestMapping(value="/board/del", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardDel(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
- 
-        //패스워드 암호화
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
-        String password = encoder.encodePassword(paramMap.get("password").toString(), null);
-        paramMap.put("password", password);
- 
-        //정보입력
-        int result = boardService.delBoard(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "패스워드를 확인해 주세요");
-        }
- 
-        return retVal;
+        return mav;
  
     }
  
-    //AJAX 호출( 게시글 패스워드 확인)
-    @RequestMapping(value="/board/check", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardCheck(@RequestParam Map<String, Object> paramMap) {
+    //댓글 작성
+    @RequestMapping(value="board/replywrite", method=RequestMethod.POST)
+    public Object boardReplySave(@ModelAttribute("br") BoardReply br) {
  
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
+    
+    	
+    	
+    	mav = new ModelAndView();
+    	System.out.println("board board_id = ? "+br.getBoard_id());
+    	int success = boardService.replyinsert(br);
+    	if(success ==1) {
+    		mav.addObject("reply_id",br.getBoard_id());
+    		mav.setViewName("boardView");
+    	}
  
-        //패스워드 암호화
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
-        String password = encoder.encodePassword(paramMap.get("password").toString(), null);
-        paramMap.put("password", password);
- 
-        //정보입력
-        int result = boardService.getBoardCheck(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "패스워드를 확인해주세요.");
-        }
- 
-        return retVal;
- 
-    }
- 
-    //AJAX 호출(댓글 등록)
-    @RequestMapping(value="/board/reply/save", method=RequestMethod.POST)
-    @ResponseBody
-    public Object boardReplySave(@RequestParam Map<String, Object> paramMap) {
- 
-        //리턴값
-        Map<String, Object> retVal = new HashMap<String, Object>();
- 
-        //패스워드 암호화
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(256);
-        String password = encoder.encodePassword(paramMap.get("reply_password").toString(), null);
-        paramMap.put("reply_password", password);
- 
-        //정보입력
-        int result = boardService.regReply(paramMap);
- 
-        if(result>0){
-            retVal.put("code", "OK");
-            retVal.put("reply_id", paramMap.get("reply_id"));
-            retVal.put("parent_id", paramMap.get("parent_id"));
-            retVal.put("message", "등록에 성공 하였습니다.");
-        }else{
-            retVal.put("code", "FAIL");
-            retVal.put("message", "등록에 실패 하였습니다.");
-        }
- 
-        return retVal;
+        return mav;
  
     }
  
@@ -333,7 +261,7 @@ public class BoardController {
     //답글 페이지이동
     @RequestMapping(value="/board/coments", method=RequestMethod.GET)
     public ModelAndView coments(@ModelAttribute("board") Board board) {
-    	
+    	System.out.println("555555555555555555555555");
         mav = new ModelAndView();
         board = boardService.getdata(board.getId());
         mav.addObject("id",board.getId());

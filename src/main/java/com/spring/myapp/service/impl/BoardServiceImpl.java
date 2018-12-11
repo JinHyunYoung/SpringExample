@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService {
         }
  
         //2.遺�紐⑤�� �룎由곕떎.
-        for(BoardReply boardReplyParent: boardReplyListParent){
+        /*for(BoardReply boardReplyParent: boardReplyListParent){
             //2-1. 遺�紐⑤뒗 臾댁“嫄� �꽔�뒗�떎.
             newBoardReplyList.add(boardReplyParent);
             //3.�옄�떇�쓣 �룎由곕떎.
@@ -91,7 +91,7 @@ public class BoardServiceImpl implements BoardService {
  
             }
  
-        }
+        }*/
  
         //�젙由ы븳 list return
         return newBoardReplyList;
@@ -142,5 +142,26 @@ public class BoardServiceImpl implements BoardService {
 		int suc  =   boardDao.updateComentOrd(board);
 		int success = boardDao.comentssave(board);
 		return success;
+	}
+
+	@Override
+	public int replyinsert(BoardReply br) {
+		String writer = (String)session.getAttribute("username");
+		br.setReply_writer(writer);
+		int success = boardDao.replyinsert(br);
+		return success;
+	}
+
+	@Override
+	public List<BoardReply>  replydata(String board_id) {
+		List<BoardReply> brList = boardDao.replydata(board_id);
+		return brList;
+	}
+
+	@Override
+	public Board boarddata(String id) {
+		System.out.println("???????? :"+id);
+		Board board = boardDao.boarddata(id);
+		return board;
 	}
 }

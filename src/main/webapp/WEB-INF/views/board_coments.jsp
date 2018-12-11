@@ -80,9 +80,12 @@
               });
               
             });
+            function a(){
+            	alert("555555555");
+            }
         </script>
 </head>
-<body>
+<body onload="a();">
 
 
 <form action="" method="post" name="listForm">
@@ -101,7 +104,7 @@
             <td>
               제목: <input type="text" id="subject" name="subject" style="width:600px;" placeholder="제목" value="RE:${subject}"/>
               작성자: <input type="text" id="writer" name="writer" style="width:170px;" maxlength="10" readonly="readonly" value="${sessionScope.username}"/>
-              비밀번호: <input type="password" id="password" name="password" style="width:170px;" maxlength="10" placeholder="패스워드"/>
+              비밀번호: <input type="password" id="password" name="password" style="width:170px;" maxlength="10" placeholder="패스워드1"/>
               <button onclick="coments()">저장</button>               
             </td>
           </tr>
@@ -121,9 +124,9 @@
       </form>
 </body>
 <script>
-  function coments(){
+  /* function coments(){
 	  var f = document.listForm;
 	  f.action="comentssave";
-  }
+  } */
 </script>
 </html>

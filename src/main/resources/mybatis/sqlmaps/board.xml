@@ -102,6 +102,17 @@
             #{reply_password}
         )
     </insert>
+    <insert id="replyinsert" parameterType="br">
+        insert into board_reply(
+            board_id,
+            reply_content,
+            reply_writer
+        )values(
+            #{board_id},
+            #{reply_content},
+            #{reply_writer}
+        )
+    </insert>
     <select id="selectBoardReplyList" resultType="com.spring.myapp.domain.BoardReply" parameterType="java.util.HashMap">
         select
             reply_id,
@@ -229,5 +240,11 @@
     <insert id="updateComentOrd" parameterType="Board">
         update board set seq = seq + 1 where grp = #{group_no} and seq >= #{seq}
     </insert>
+    <select id="replydata" parameterType="String" resultType="br">
+      select reply_content,reply_writer from board_reply where board_id=#{board_id} 
+    </select>
+    <select id="bordata" parameterType="String" resultType="board">
+      select * from board where id=#{id} 
+    </select>
 </mapper>
  
