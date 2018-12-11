@@ -47,8 +47,8 @@
           <tr>
             <td colspan="2" align="right">
               <input type="password" id="password" name="password" style="width:200px;" maxlength="10" placeholder="패스워드"/>
-              <button id="modify" name="modify">글 수정</button>
-              <button id="delete" name="delete">글 삭제</button>
+              <button id="modify" name="modify" type="button">글 수정</button>
+              <button id="delete" name="delete" type="button">글 삭제</button>
             </td>
           </tr>
           <tr>
@@ -68,7 +68,7 @@
         <table style="width:85%;">
           <tr>
             <td align="right">
-              <button onclick="comments(${board1.id},'${ board1.subject}')">답글1</button>
+              <button onclick="comments(${board1.id},'${ board1.subject}')" type="button">답글1</button>
             </td>
           </tr>
         </table>
@@ -83,8 +83,8 @@
                 ${brList.reply_writer}
               </td>
               <td align="center">
-                <button name="reply_modify">수정</button>
-                <button name="reply_del">삭제</button>
+                <button name="reply_modify" type="button">수정</button>
+                <button name="reply_del" type="button">삭제</button>
               </td>
             </tr>
           </c:forEach>
@@ -94,14 +94,14 @@
           <tr>
             <td>
               <input type="text" style="width:80%;" id="reply_content" name="reply_content" placeholder="댓글을 입력하세요."/>
-              <button onclick="replywriter(); return false;">댓글등록</button>
+              <button onclick="replywriter();" type="button">댓글등록</button>
             </td>
           </tr>
         </table>
         <table style="width:85%;">
           <tr>
             <td align="right">
-              <button id="list" name="list">게시판</button>
+              <button id="list" name="list" type="button">게시판</button>
             </td>
           </tr>
         </table>

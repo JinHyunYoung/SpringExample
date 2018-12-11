@@ -131,22 +131,12 @@ public class BoardController {
     @RequestMapping(value = "/board/view")
     public ModelAndView boardView(@ModelAttribute("br") BoardReply br) {
     	
-    	System.out.println("br ? "+br.getBoard_id());
-    	
     	mav = new ModelAndView();
     	String id = br.getBoard_id();
     	List<BoardReply> brList = boardService.replydata(br.getBoard_id());
-    	
     	Board board1 = boardService.boarddata(id);
-    	System.out.println("0000000000000000000000000");
-    	System.out.println("brList--------------------");
     	mav.addObject("brList",brList);
     	mav.addObject("board1",board1);
-    	mav.addObject("board1",board1);
-    	mav.addObject("board1",board1);
-    	mav.addObject("board1",board1);
-    	mav.addObject("board1",board1);
-    	//Board board = boardService.getdata(br.getReply_id());
     	mav.addObject("board_id",br.getBoard_id());
     	mav.setViewName("boardView");
     	System.out.println();
