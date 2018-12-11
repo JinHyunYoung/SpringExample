@@ -125,7 +125,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Member getlogin(String u_id) {
 		Member mb = boardDao.login(u_id);
-		System.out.println("seivice : "+mb);
 		if(mb !=null) {
 			session.setAttribute("userid", mb.getU_id());
 			session.setAttribute("username", mb.getU_name());
@@ -136,23 +135,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board getdata(String id) {
 		Board board = boardDao.getdata(id);
-		System.out.println("sss :"+board);
 		return board;
 	}
 	@Override
 	public int comentssave(Board board) {;
-		System.out.println("sss :"+board);
 		int suc  =   boardDao.updateComentOrd(board);
 		int success = boardDao.comentssave(board);
-		System.out.println("서비스 :"+success);
 		return success;
 	}
-
-	/*@Override
-	public ModelAndView getlogin(String u_id) {
-		System.out.println("111");
-		String state = boardDao.login(u_id);
-		return null;
-	}*/
- 
 }

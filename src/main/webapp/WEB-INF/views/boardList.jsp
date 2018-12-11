@@ -108,25 +108,25 @@
 	    	<input type="hidden" id="startPage" name="startPage" value=""><!-- 페이징을 위한 hidden타입 추가 -->
         <input type="hidden" id="visiblePages" name="visiblePages" value=""><!-- 페이징을 위한 hidden타입 추가 -->
 	    	<div align="center">
-	    		<table class="board_list">
+	    		<table class="sub_news" border="1">
 	    			<tr>
 	    				<td align="right" style="text-align: right;"> 
 	    					<button type="button" id="write" name="write">글 작성</button>
 	    				</td>
 	    			</tr>
 	    		</table>
-	    		<table border="1" class="board_list">
+	    		<table border="1" class="sub_news">
 	    			<tr>
-	    				<th width="50px">
+	    				<th style="width:50px;">
 	    					No
 	    				</th>
-	    				<th width="200px">
+	    				<th style="width:200px;">
 	    					제목
 	    				</th>
-	    				<th width="100px">
+	    				<th style="width:100px;">
 	    					작성자
 	    				</th>
-	    				<th width="200px">
+	    				<th style="width:200px;">
 	    					작성일
 	    				</th>
 	    			</tr>
@@ -140,33 +140,22 @@
 			           	</c:when>
 			           	<c:otherwise>
 			            	<c:forEach var="boardList" items="${boardList}" varStatus="status">
-								<tr>
-								    <td align="center"><%= i++ %></td>
-						    		<%-- <td align="center">${boardList.id}</td> --%>
-						    		<td style="text-align: left;">
-						    			<a name="subject" class="tLeft" content_id="${boardList.id}"> 
-	                      <c:if test ="${boardList.level != 0 }">
-	                         <c:forEach  var="i"   begin="1" end="${boardList.level}" step="1">
-	                           &nbsp;&nbsp;&nbsp;  
-	                          </c:forEach>
-	                           <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
-	                       </c:if>
-	                       ${boardList.subject}
-                      <%-- <c:if test="${boardList.level ==1 }">
-                        ${boardList.subject}
-                      </c:if> --%>
-						    			<%-- <c:if test="${boardList.level !=1 }">
-						    			  &nbsp;&nbsp;&nbsp;
-						    			  <img alt="" src="${pageContext.request.contextPath}/resources/img/coments.png">
-						    			  ${boardList.subject}
-						    			</c:if>  
-						    			<c:if test="${boardList.level ==1 }">
-                        ${boardList.subject}
-                      </c:if>  --%>
-						    			</a>
-						    		</td>
-						    		<td align="center">${boardList.writer}</td>
-						    		<td align="center">${boardList.register_datetime}</td>
+								    <tr>
+									    <td align="center" class="title" style="width:50px;"><%= i++ %></td>
+							    		<td style="text-align: left; width:50px;" class="title" >
+							    			<a name="subject" class="title" content_id="${boardList.id}">
+		                      <c:if test ="${boardList.level != 0 }">
+		                         <c:forEach  var="i"   begin="1" end="${boardList.level}" step="1">
+		                           &nbsp;&nbsp;&nbsp;  
+		                          </c:forEach>
+		                           <img alt="" src="${pageContext.request.contextPath}/resources/img/coment.png">
+		                       </c:if>
+		                        
+		                       <b style="cursor: pointer;">${boardList.subject}</b>
+							    			</a>
+							    		</td>
+							    		<td align="center" class="title" style="width:100px;">${boardList.writer}</td>
+							    		<td align="center" class="title" style="width:200px;">${boardList.register_datetime}</td>
 						    	</tr>
 						    </c:forEach>
 			           	</c:otherwise> 

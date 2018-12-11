@@ -37,8 +37,6 @@ public class BoardController {
     @RequestMapping(value = "/board/list")
     public String boardList(@RequestParam Map<String, Object> paramMap, Model model) {
     		
-    	System.out.println("gwgwg");
-    	System.out.println(StringUtils.isNotBlank((CharSequence) paramMap.get("startPage")));
         //조회 하려는 페이지
         int startPage = (StringUtils.isNotBlank((CharSequence)paramMap.get("startPage")) ?Integer.parseInt(paramMap.get("startPage").toString()):1);
         //한페이지에 보여줄 리스트 수
@@ -68,8 +66,6 @@ public class BoardController {
  
         //ORACLE
         paramMap.put("end", startLimitPage+visiblePages);
-        System.out.println("start :"+startLimitPage);
-        System.out.println("end :"+startLimitPage+visiblePages);
       //jsp 에서 보여줄 정보 추출
         model.addAttribute("startPage", startPage+"");//현재 페이지         
         model.addAttribute("totalCnt", totalCnt);//전체 게시물수
@@ -318,7 +314,6 @@ public class BoardController {
         String password = encoder.encodePassword(paramMap.get("reply_password").toString(), null);
         paramMap.put("reply_password", password);
  
-        System.out.println(paramMap);
  
       //정보입력
         boolean check = boardService.updateReply(paramMap);
@@ -338,8 +333,6 @@ public class BoardController {
     //답글 페이지이동
     @RequestMapping(value="/board/coments", method=RequestMethod.GET)
     public ModelAndView coments(@ModelAttribute("board") Board board) {
-    	System.out.println("board :" + board.getId());
-    	System.out.println("board :" + board.getSubject());
     	
         mav = new ModelAndView();
         board = boardService.getdata(board.getId());
@@ -355,14 +348,9 @@ public class BoardController {
     //답글 달기
     @RequestMapping(value="/board/comentssave", method=RequestMethod.POST)
     public ModelAndView comentssave(@ModelAttribute("board") Board board) {
-    	System.out.println("-------------");
-    	/*board.setGroupLayer(board.getGroupLayer()+1); //답글 레벨 1 증가
-    	board.setGroupOrd(board.getGroupOrd()+1); //답글 레벨 1 증가
-    	System.out.println(board.getGroupLayer());*/
+   
     	board.setLevel(board.getLevel()+1);
     	board.setSeq(board.getSeq()+1);
-    	
-    	
     	System.out.println("------------------------");
     	System.out.println("답글 컬럼 가져오기 start");
     	System.out.println("board id :" + board.getId());
@@ -372,29 +360,10 @@ public class BoardController {
     	System.out.println("board subject:" + board.getSubject());
     	System.out.println("board content:"+ board.getContent());
     	System.out.println("답글 컬럼 가져오기 end");
-    	
-    	
-    	
-    	
-    	
-    	
     	int success = boardService.comentssave(board);
-    	System.out.println("컨트롤러 success  :"+success);
-    	System.out.println("----------------------" +board.getLevel());
     	mav.addObject("boardList",board);
     	mav.setViewName("redirect:/board/list");
-    	
-    	
         return mav;
  
     }
-    // controller 추가 부분
-    //
-    /*@RequestMapping(value="/joinform", method=RequestMethod.POST)
-    public Object joinform() {
- 
-        return retVal;
- 
-    }*/
- 
 }

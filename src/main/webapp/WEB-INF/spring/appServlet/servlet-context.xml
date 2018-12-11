@@ -25,12 +25,13 @@
 	<beans:bean id = "loginInterceptor" class="com.spring.myapp.interceptor.SessionInterceptor"></beans:bean>
 	<interceptors>
 	  <interceptor>
-	   <mapping path="/*/*"/>
+	   <mapping path="/**"/>
+	   <exclude-mapping path="/"/>
+	   <exclude-mapping path="/login"/>
+	   <exclude-mapping path="/joinform"/>
+	   <exclude-mapping path="/join"/>
+	   <exclude-mapping path="/idcheck"/>
 	   <beans:ref bean="loginInterceptor"/>
 	  </interceptor>
 	</interceptors>
-
-
-	
-	
 </beans:beans>

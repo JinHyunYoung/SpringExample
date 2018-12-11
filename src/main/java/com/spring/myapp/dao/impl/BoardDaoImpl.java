@@ -107,7 +107,6 @@ public class BoardDaoImpl implements BoardDao{
 
 	@Override
 	public Member login(String userid) {
-		System.out.println("asdasdasd "+userid);
 		Member mb = sqlSession.selectOne("login",userid);
 		return mb;
 	}
@@ -115,32 +114,18 @@ public class BoardDaoImpl implements BoardDao{
 	@Override
 	public Board getdata(String id) {
 		Board board = sqlSession.selectOne("boarddata",id);
-		
-		System.out.println("boardleve L "+board.getLevel());
-		System.out.println("board 1 :"+board.getSeq());
 		return board;
 	}
 
 	@Override
 	public int comentssave(Board board) {
-		System.out.println("!11 L "+board.getSeq());
-		/*if(board.getLevel() ==  2) {
-			int number = sqlSession.selectOne("select1",board.getGroup_no()); 
-			board.setNo(number);
-			//no 2
-		}*/
 		int success = sqlSession.insert("comentssave",board); 
-		System.out.println("dao : "+success);
 		return success;
 	}
 
 	@Override
 	public int updateComentOrd(Board board) {
-		// TODO Auto-generated method stub
-		
-		
 		int success = sqlSession.update("updateComentOrd",board); 
-		System.out.println("dao : "+success);
 		return success;
 	}
 	
