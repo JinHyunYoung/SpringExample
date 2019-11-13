@@ -2,17 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.myapp.dao.BoardDao">
+    
+    
+    
     <insert id="insertContent" parameterType="java.util.HashMap">
+      <selectKey resultType="String" keyProperty="vncRqMngNo" order="BEFORE">
+         select ifnull(max(id),0) +1 from board;
+      </selectKey>
         insert into board(
             subject,
             content,
             writer,
-            password
+            grp,
+            level,
+            seq,
+            no
+            <!-- password -->
         )values(
             #{subject},
             #{content},
             #{writer},
-            #{password}
+            ${vncRqMngNo},
+            1,
+            1,
+            0
+            <!-- #{password} -->
         )
     </insert>
     <insert id="updateContent" parameterType="java.util.HashMap">
@@ -31,17 +45,35 @@
             count(id)
         from
             board
+        where
+        	  1 =1 
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
+        and   subject = #{subject}
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
+        and   writer  =  #{writer} 
+        </if>    
     </select>
-    <select id="selectContent" resultType="com.spring.myapp.domain.Board" parameterType="java.util.HashMap">
+    <select id="selectContent" resultType="Board" parameterType="java.util.HashMap">
         select
             id,
             subject,
             content,
             writer,
+            level,
             date_format(register_datetime, '%Y-%m-%d %H:%i:%s') register_datetime
         from
             board
-        order by id
+        where
+        	  1 =1 
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(subject)">
+        and   subject like concat('%',#{subject},'%') 
+        </if>
+        <if test="@org.apache.commons.lang3.StringUtils@isNotBlank(writer)">
+        and   writer like concat('%',#{writer},'%')
+        </if>     
+        order by grp desc, no asc 
+        <!-- order by grp desc,no,level asc -->
         limit #{start}, #{end}
     </select>
     <select id="selectContentView" resultType="com.spring.myapp.domain.Board" parameterType="java.util.HashMap">
@@ -163,13 +195,40 @@
 		where
 		    reply_id = #{reply_id}
     </update>
-    <select id="login" resultType="String" parameterType="String">
+    <select id="login" resultType="com.spring.myapp.dto.Member" parameterType="String">
     	select
-    		u_id
+    		*
     	from
     		member
     	where
     		u_id = #{u_id}
     </select>
+    <select id="boarddata" resultType="Board" parameterType="int">
+      select
+        id,subject,level,grp as group_no,seq,no
+      from
+        Board
+      where
+        id = #{id}
+       
+    </select>
+    <select id="select1" resultType="int" parameterType="String">
+      select MAX(no) +1  from board  where grp = #{group_no}  ;
+    </select>
+    <insert id="comentssave" parameterType="Board">
+        insert into board
+        (subject,content,writer,grp,level,seq,no)
+           values(
+	            
+	            #{subject},
+	            #{content},
+	            #{writer},
+	            #{group_no},
+	            #{level},
+	            #{seq},
+	            #{no}
+	            
+        )
+    </insert>
 </mapper>
  
